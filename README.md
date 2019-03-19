@@ -2,6 +2,8 @@
 Pure Componented Based Programming Language Specification<br>
 Based on [my old gist](https://gist.github.com/pjc0247/ac68949afab83b477d0c7840a18170ea), added some modifications and translations.<br>
 <br>
+Simillar with Unity's __[ECS](https://unity3d.com/kr/learn/tutorials/topics/scripting/introduction-ecs)__.<br>
+<br>
 It does not contains any implementations.
 
 Specifications
@@ -9,7 +11,6 @@ Specifications
 Component
 ----
 컴포넌트는 하나의 독립 개채로 존재할 수 있으면서, 동시에 합쳐질 수 잇는 단위입니다.<br><br>
-__Component__ is very basic entity of 
 
 컴포넌트는 다른 컴포넌트를 포함할 수 있습니다.<br>
 포함된다는것은 부모-자식 관계가 아니며 계층 구조상 동일한 위치에 속합니다.
