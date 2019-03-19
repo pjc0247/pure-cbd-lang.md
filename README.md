@@ -1,6 +1,6 @@
 # pure-cbd-lang.md
 Pure Componented Based Programming Language Specification<br>
-Based on [my old gist](https://gist.github.com/pjc0247/ac68949afab83b477d0c7840a18170ea) and added some modifications and translations.<br>
+Based on [my old gist](https://gist.github.com/pjc0247/ac68949afab83b477d0c7840a18170ea), added some modifications and translations.<br>
 <br>
 It does not contains any implementations.
 
@@ -8,7 +8,8 @@ Specifications
 ====
 Component
 ----
-컴포넌트는 하나의 독립 개채로 존재할 수 있으면서, 동시에 합쳐질 수 잇는 단위입니다.<br><br
+컴포넌트는 하나의 독립 개채로 존재할 수 있으면서, 동시에 합쳐질 수 잇는 단위입니다.<br><br>
+__Component__ is very basic entity of 
 
 컴포넌트는 다른 컴포넌트를 포함할 수 있습니다.<br>
 포함된다는것은 부모-자식 관계가 아니며 계층 구조상 동일한 위치에 속합니다.
@@ -24,7 +25,7 @@ end
 
 Protocol
 ----
-프로토콜은 컴포넌트의 집합입니다.<br>
+__Protocol__ is a set of components.<br>
 프로토콜 안에 포함되는 컴포넌트는 중복되는 프로퍼티, 메소드가 포함되지 않음이 보장되어야 합니다.
 ```
 Component GameObject
@@ -39,7 +40,8 @@ Protocol Object2D
   : GameObject,
     Renderer
 ```
-프로토콜의 사용
+
+__Usage__
 ```
 Component Enemy
   : Object2D as obj
@@ -56,8 +58,8 @@ end
 
 Hierarchy
 ----
-계층 구조를 언어 레벨에서 지원합니다.<br>
-`addChild` 키워드를 사용하여 자식 컴포넌트를 추가합니다.
+Supports __Hierarchy__ in language level.<br>
+Use `addChild` keyword to append child component.
 ```
 addChild HpStatusBar
 ```
@@ -73,7 +75,7 @@ Component GameObject
   [Mul] float opacity = 1.0f
 end
 ```
-`g` 네임스페이스에 접근하면 항상 루트값을 가져올 수 있습니다.
+use `g` syntax to retrive root values.
 ```
 // 아래 코드는 항상 루트 speed에 접근합니다.
 int globalSpeed = g::speed
@@ -157,7 +159,7 @@ Threading model
 메세징에 의한 멀티 스레딩과, 코루틴에 의한 멀티 스레딩 두가지를 지원합니다.<br>
 둘다 락이 없으며, ㅁㄴㅇㄻㄴㅇㄹ
 <br><br>
-__백그라운드 태스크__<br>
+__Background Task__<br>
 
 ```
 Component UINotice
@@ -174,7 +176,7 @@ Component UINotice
   end
 end
 ```
-__포그라운드 태스크__<br?
+__Foreground Task__<br?
 
 ```
 task http_get uri
@@ -207,14 +209,14 @@ end
 `on`으로 지정된 리스너는 기본적으로 메인 스레드에서 동작합니다. 이는 `publish`를 호출한 스레드와 무관합니다.
 ```
 on :hi
-  // 항상 메인스레드
+  // Always executed in foreground thread
 end
 ```
 `background_on`은 항상 외부 스레드에서 메세지를 받습니다.
 ```
 // 이름존나이상하네
 background_on :hi
-  // 항상 외부스레드
+  // Always executed in background thread
 end
 ```
 
