@@ -70,15 +70,15 @@ Hierarchy Variable
 계층 변수는 부모에서 자식으로 넘어올 때 어떻게 계산될지를 지정할 수 있습니다.
 ```
 Component GameObject
-  // 좌표는 더해져야 합니다.
+  // Positions should be added
   [Add] float x = 0, y = 0
-  // 투명도는 곱해져야 합니다.
+  // Opacity should be multiplied
   [Mul] float opacity = 1.0f
 end
 ```
 use `g` syntax to retrive root values.
 ```
-// 아래 코드는 항상 루트 speed에 접근합니다.
+// this code always fetches root value.
 int globalSpeed = g::speed
 ```
 만약 부모 컴포넌트에 존재하는 프로퍼티를 같은 이름으로 재정의하는것으로 계층 변수를 풀어버릴 수 있습니다.
