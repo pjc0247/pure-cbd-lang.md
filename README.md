@@ -102,24 +102,27 @@ opacity -> 0
 ```
 애니메이션 도중에 새로운 값 대입이 발생하면 기존 애니메이션은 중지됩니다.
 ```
-// 기존의 모든 opacity 애니메이션은 중지됩니다.
+// Stops all previous animations and assign
 opacity = 255
 ```
 
+<br>
+[FxUnity](https://github.com/pjc0247/FxUnity)
+
 Messaging
 ----
-머여이게
+In-process pubsub messaging is provided by syntax level.
 ```
 Component UIButton
-  // 수신기는 `on` 키워드로 시작합니다.
-  // 이러한 특수 메소드들은 리턴값이 항상 void입니다.
+  // Subscriber starts with `on` keyword.
+  // These methods' return type is always 'void'
   on :click e
-    // 클릭 좌표
+    // mouse click position
     e.x, e.y
   end
 end
 ```
-메세지 발송은 `publish` 키워드를 이용합니다.
+Use `publish` keyword to publish messages.
 ```
 Component MouseInputDriver
   /* .... */
@@ -127,7 +130,7 @@ Component MouseInputDriver
   /* .... */
 end
 ```
-로컬 메세지 발송은 `publish_local` 키워드를 사용합니다. 로컬 메세지는 현재 오브젝트 내부에서만 전달됩니다.
+Use `publish_local` to publish messages in local scope. This will be delivered in a local object.
 ```
 publish_local :click {x => 1, y => 1}
 ```
@@ -199,7 +202,7 @@ Component UIProfile
     profile = load_user_profile_from_www
   
     commit
-      // 이 블럭은 메인 스레드에서 실행됩니다.
+      // This codeblock will be ran on main-thread.
       // 이 블럭은 안전한 함수여야 합니다.
       user.profile = profile
     end
@@ -207,15 +210,14 @@ Component UIProfile
 end
 ```
 
-`on`으로 지정된 리스너는 기본적으로 메인 스레드에서 동작합니다. 이는 `publish`를 호출한 스레드와 무관합니다.
+Subscribers with `on` always be executed on main-thread regardless the thread which `publish` was executed.
 ```
 on :hi
   // Always executed in foreground thread
 end
 ```
-`background_on`은 항상 외부 스레드에서 메세지를 받습니다.
+Subscribers with `background_on` always be executed on background-thread.
 ```
-// 이름존나이상하네
 background_on :hi
   // Always executed in background thread
 end
